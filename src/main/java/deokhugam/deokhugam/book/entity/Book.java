@@ -130,7 +130,4 @@ public class Book {
 		this.updatedAt = Instant.now();
 	}
 
-	/* < 집계 정보 > */
-
-
 }
