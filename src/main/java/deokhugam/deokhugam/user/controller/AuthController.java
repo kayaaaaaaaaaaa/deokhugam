@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import deokhugam.deokhugam.user.dto.request.LoginRequest;
+import deokhugam.deokhugam.user.dto.response.LoginResponse;
 import deokhugam.deokhugam.user.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
