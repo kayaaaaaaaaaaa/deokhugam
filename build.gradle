@@ -25,10 +25,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-h2console'
+	// spring-webmvc(REST 등), validation, 내장톰캣, logging, jackson 등
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// JPA, Hibernate, 트랜잭션, DataSource
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// H2 DB 웹 콘솔
+	implementation 'org.springframework.boot:spring-boot-h2console'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
