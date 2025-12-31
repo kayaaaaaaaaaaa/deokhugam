@@ -20,8 +20,8 @@ public class DeokhugamException extends RuntimeException {
 		this.details = new HashMap<>();
 	}
 
-	public DeokhugamException(ErrorCode errorCode, String message) {
-		super(message);
+	public DeokhugamException(ErrorCode errorCode, Throwable cause) {
+		super(errorCode.getMessage(), cause);
 		this.errorCode = errorCode;
 		this.timestamp = Instant.now();
 		this.details = new HashMap<>();
