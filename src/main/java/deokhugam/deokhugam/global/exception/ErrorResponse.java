@@ -1,4 +1,4 @@
-package deokhugam.deokhugam.global.exception;
+﻿package deokhugam.deokhugam.global.exception;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class ErrorResponse {
 		this(
 			Instant.now(),
 			"VALIDATION_ERROR",
-			"요청 데이터가 유효하지 않습니다.",
+			"요청 값 검증에 실패했습니다.",
 			convertFieldErrorsToDetails(fieldErrors),
 			MethodArgumentNotValidException.class.getSimpleName(),
 			status

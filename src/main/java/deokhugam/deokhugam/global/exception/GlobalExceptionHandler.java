@@ -1,8 +1,10 @@
-package deokhugam.deokhugam.global.exception;
+﻿package deokhugam.deokhugam.global.exception;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -28,12 +30,21 @@ public class GlobalExceptionHandler {
 	}
 
 
+
 	/**
 	 * 시스템 예외에 대한 처리를 합니다.
 	 *
 	 * @param exception
 	 * @return 해당 exception에 대한 에러 응답
 	 */
+
+	// 요청 값 검증 실패 시
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+		ErrorResponse errorResponse = new ErrorResponse(fieldErrors, HttpStatus.BAD_REQUEST.value());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+	}
 
 	// 런타임 예외지만 비즈니스 예외는 아닌 경우
 	@ExceptionHandler(RuntimeException.class)

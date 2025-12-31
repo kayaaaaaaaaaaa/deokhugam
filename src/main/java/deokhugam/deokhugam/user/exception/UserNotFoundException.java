@@ -1,12 +1,10 @@
-package deokhugam.deokhugam.user.exception;
+﻿package deokhugam.deokhugam.user.exception;
 
 import java.util.UUID;
 
-import deokhugam.deokhugam.auth.exception.LoginFailedException;
 import deokhugam.deokhugam.global.exception.ErrorCode;
 
 public class UserNotFoundException extends UserException {
-
 
 	public UserNotFoundException() {
 		super(ErrorCode.USER_NOT_FOUND);
