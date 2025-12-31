@@ -33,4 +33,22 @@ public class AuthService {
 
 		return LoginResponse.of(user);
 	}
+
+	@Transactional
+	public LoginResponse signUp(String email, String nickname, String rawPassword) {
+		if (userRepository.findByEmail(email).isPresent()) {
+			throw DuplicateEmailException.duplicateEmail(email);
+		}
+		if (userRepository.findByNickname(nickname).isPresent()) {
+			throw DuplicateNicknameException.duplicateNickname(nickname);
+		}
+
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		User user = User.create(email, nickname, encodedPassword);
+		User savedUser = userRepository.save(user);
+
+		return LoginResponse.of(savedUser);
+	}
+
+
 }

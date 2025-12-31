@@ -65,8 +65,14 @@ public class GlobalExceptionHandler {
 
 			// 401 Unauthorized
 			case LOGIN_INPUT_INVALID ->  HttpStatus.UNAUTHORIZED;
+
 			// 404 Not Found
 			case USER_NOT_FOUND -> HttpStatus.NOT_FOUND;
+
+			// 409 Conflict
+			case EMAIL_ALREADY_EXISTS,
+				 NICKNAME_ALREADY_EXISTS -> HttpStatus.CONFLICT;
+
 			// 500 Internal Server Error
 			case INTERNAL_SERVER_ERROR -> HttpStatus.INTERNAL_SERVER_ERROR;
 
