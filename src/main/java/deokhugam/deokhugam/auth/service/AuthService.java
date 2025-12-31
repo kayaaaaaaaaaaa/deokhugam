@@ -1,9 +1,9 @@
-package deokhugam.deokhugam.user.service;
+package deokhugam.deokhugam.auth.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import deokhugam.deokhugam.user.dto.response.LoginResponse;
+import deokhugam.deokhugam.auth.dto.response.LoginResponse;
 import deokhugam.deokhugam.user.entity.User;
 import deokhugam.deokhugam.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

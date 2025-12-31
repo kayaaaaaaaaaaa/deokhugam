@@ -1,4 +1,4 @@
-package deokhugam.deokhugam.user.dto.response;
+package deokhugam.deokhugam.auth.dto.response;
 
 import java.util.UUID;
 
