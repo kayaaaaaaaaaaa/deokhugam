@@ -63,7 +63,13 @@ public class GlobalExceptionHandler {
 			case ILLEGAL_ARGUMENT_ERROR,
 				 INVALID_REQUEST -> HttpStatus.BAD_REQUEST;
 
-			default -> HttpStatus.INTERNAL_SERVER_ERROR;
+			// 401 Unauthorized
+			case LOGIN_INPUT_INVALID ->  HttpStatus.UNAUTHORIZED;
+			// 404 Not Found
+			case USER_NOT_FOUND -> HttpStatus.NOT_FOUND;
+			// 500 Internal Server Error
+			case INTERNAL_SERVER_ERROR -> HttpStatus.INTERNAL_SERVER_ERROR;
+
 		};
 	}
 }
