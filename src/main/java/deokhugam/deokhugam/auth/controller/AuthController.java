@@ -1,5 +1,6 @@
 package deokhugam.deokhugam.auth.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,9 @@ public class AuthController {
 	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
 		LoginResponse response = authService.login(request.email(), request.password());
 
-		return ResponseEntity.ok(response);
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(response);
 	}
 
 	@PostMapping("/signup")
@@ -35,6 +38,8 @@ public class AuthController {
 			request.password()
 		);
 
-		return ResponseEntity.ok(response);
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(response);
 	}
 }

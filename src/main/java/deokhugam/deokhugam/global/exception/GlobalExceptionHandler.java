@@ -1,5 +1,6 @@
 ﻿package deokhugam.deokhugam.global.exception;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(DeokhugamException.class)
 	protected ResponseEntity<ErrorResponse> handleDeokhugamException(DeokhugamException exception) {
+		// 예시) 커스텀 예외 발생: code=USER_NOT_FOUND, message = 사용자 없음
 		log.error("커스텀 예외 발생: code={}, message = {}", exception.getErrorCode(), exception.getMessage());
 		HttpStatus status = detemineHttpStatus(exception);
 		ErrorResponse errorResponse = new ErrorResponse(exception, status.value());
@@ -39,9 +41,17 @@ public class GlobalExceptionHandler {
 	 */
 
 	// 요청 값 검증 실패 시
+	// 예시) 요청 값 검증 실패: message=..., errors=[field=email, rejected=bad, msg=이메일 형식이 아닙니다 | field=age, rejected=-1, msg=최소 18 이상이어야 합니다]
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
 		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
+		String formattedErrors = fieldErrors.stream()
+			.map(error -> String.format("field=%s, rejected=%s, msg=%s",
+				error.getField(),
+				String.valueOf(error.getRejectedValue()),
+				error.getDefaultMessage()))
+			.collect(Collectors.joining(" | "));
+		log.error("요청 값 검증 실패: message={}, errors=[{}]", exception.getMessage(), formattedErrors);
 		ErrorResponse errorResponse = new ErrorResponse(fieldErrors, HttpStatus.BAD_REQUEST.value());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
@@ -49,6 +59,8 @@ public class GlobalExceptionHandler {
 	// 런타임 예외지만 비즈니스 예외는 아닌 경우
 	@ExceptionHandler(RuntimeException.class)
 	protected ResponseEntity<ErrorResponse> handleRuntimeException(Exception exception) {
+		// 예시) 런타임 예외 발생 (스택트레이스 포함)
+		log.error("런타임 예외 발생", exception);
 		ErrorResponse errorResponse = new ErrorResponse(exception, HttpStatus.INTERNAL_SERVER_ERROR.value());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
@@ -56,6 +68,8 @@ public class GlobalExceptionHandler {
 	// 모든 핸들러가 잡지 못하는 예외가 발생한 경우 (최종 안전망 역할의 핸들러)
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleException(Exception exception) {
+		// 예시) 예상하지 못한 예외 발생 (스택트레이스 포함)
+		log.error("예상하지 못한 예외 발생", exception);
 		ErrorResponse errorResponse = new ErrorResponse(exception, HttpStatus.INTERNAL_SERVER_ERROR.value());
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
@@ -70,6 +84,7 @@ public class GlobalExceptionHandler {
 		ErrorCode errorCode = exception.getErrorCode();
 
 		return switch (errorCode) {
+
 			// 400 Bad Request
 			case ILLEGAL_ARGUMENT_ERROR,
 				 INVALID_REQUEST -> HttpStatus.BAD_REQUEST;

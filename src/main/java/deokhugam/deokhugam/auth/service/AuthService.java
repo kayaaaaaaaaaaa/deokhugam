@@ -36,6 +36,7 @@ public class AuthService {
 
 	@Transactional
 	public LoginResponse signUp(String email, String nickname, String rawPassword) {
+
 		if (userRepository.findByEmail(email).isPresent()) {
 			throw DuplicateEmailException.duplicateEmail(email);
 		}
