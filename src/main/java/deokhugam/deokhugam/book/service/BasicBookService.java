@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import deokhugam.deokhugam.book.dto.request.BookCreateRequest;
 import deokhugam.deokhugam.book.dto.request.BookUpdateRequest;
@@ -21,7 +22,7 @@ public class BasicBookService implements BookService {
 
 	@Override
 	@Transactional
-	public Book create(BookCreateRequest request) {
+	public Book create(BookCreateRequest request, MultipartFile thumbnailImage) {
 		Book book = request.toEntity();
 		return bookRepository.save(book);
 	}
