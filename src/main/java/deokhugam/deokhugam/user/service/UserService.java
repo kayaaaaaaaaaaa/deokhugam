@@ -13,3 +13,5 @@ public interface UserService {
 
 	void softDelete(UUID userId);
 
+	void hardDelete(UUID userId);
+}

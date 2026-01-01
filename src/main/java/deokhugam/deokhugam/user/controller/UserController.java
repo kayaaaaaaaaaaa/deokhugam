@@ -57,4 +57,14 @@ public class UserController {
 			.build();
 	}
 
+	@DeleteMapping("/{userId}/hard")
+	public ResponseEntity<Void> hardDelete(
+		@PathVariable UUID userId
+	) {
+		userService.hardDelete(userId);
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
+			.build();
+	}
+
 }
