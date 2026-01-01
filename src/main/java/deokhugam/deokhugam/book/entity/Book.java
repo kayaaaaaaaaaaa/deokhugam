@@ -161,7 +161,7 @@ public class Book {
 		}
 	}
 
-	public void delete() {
+	public void softDelete() {
 		if (!this.isDeleted) {
 			this.isDeleted = true;
 			touch();

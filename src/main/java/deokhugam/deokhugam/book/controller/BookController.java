@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -59,16 +60,6 @@ public class BookController {
 			.body(response);
 	}
 
-	// @DeleteMapping("/{bookId}")
-	// public ResponseEntity<Void> softDelete(
-	// 	@PathVariable UUID bookId
-	// ) {
-	// 	bookService.softDelete(bookId);
-	// 	return ResponseEntity
-	// 		.status(HttpStatus.NO_CONTENT)
-	// 		.build();
-	// }
-	//
 	// @DeleteMapping("/{bookId}/hard")
 	// public ResponseEntity<Void> hardDelete(
 	// 	@PathVariable UUID bookId
@@ -78,5 +69,15 @@ public class BookController {
 	// 		.status(HttpStatus.NO_CONTENT)
 	// 		.build();
 	// }
+	@DeleteMapping("/{bookId}")
+	public ResponseEntity<Void> softDelete(
+		@PathVariable UUID bookId
+	) {
+		bookService.softDelete(bookId);
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
+			.build();
+	}
+
 
 }
