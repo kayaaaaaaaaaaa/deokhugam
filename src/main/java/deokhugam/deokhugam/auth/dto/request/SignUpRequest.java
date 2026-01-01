@@ -1,4 +1,4 @@
-﻿package deokhugam.deokhugam.auth.dto.request;
+package deokhugam.deokhugam.auth.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

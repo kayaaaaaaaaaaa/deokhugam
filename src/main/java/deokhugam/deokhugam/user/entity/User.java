@@ -1,5 +1,8 @@
 package deokhugam.deokhugam.user.entity;
 
+import java.time.Instant;
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,9 +11,6 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.Instant;
-import java.util.UUID;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -76,7 +76,7 @@ public class User {
 		}
 	}
 
-	public void delete() {
+	public void softDelete() {
 		this.isDeleted = true;
 		touch();
 	}

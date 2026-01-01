@@ -1,4 +1,4 @@
-﻿package deokhugam.deokhugam.global.exception;
+package deokhugam.deokhugam.global.exception;
 
 import java.time.Instant;
 import java.util.HashMap;

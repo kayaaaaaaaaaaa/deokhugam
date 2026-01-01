@@ -1,3 +1,26 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: deokhugam
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:C:/Users/answe/my_dev/h2_db_files/my_deokhugam;AUTO_SERVER=TRUE
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console # H2에서 제공하는 웹 관리 콘솔 경로
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true            # SQL 로그 출력
+    open-in-view: false       # 실무 기본값
+    properties:
+      hibernate:
+        format_sql: true      # SQL 예쁘게 출력

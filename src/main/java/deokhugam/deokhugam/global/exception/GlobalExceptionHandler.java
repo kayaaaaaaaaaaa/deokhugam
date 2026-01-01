@@ -1,4 +1,4 @@
-﻿package deokhugam.deokhugam.global.exception;
+package deokhugam.deokhugam.global.exception;
 import java.util.List;
 import java.util.stream.Collectors;
 
