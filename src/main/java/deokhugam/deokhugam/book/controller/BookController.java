@@ -7,12 +7,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import deokhugam.deokhugam.book.dto.request.BookCreateRequest;
+import deokhugam.deokhugam.book.dto.request.BookUpdateRequest;
 import deokhugam.deokhugam.book.dto.response.BookDetailResponse;
 import deokhugam.deokhugam.book.entity.Book;
 import deokhugam.deokhugam.book.service.BookService;
@@ -44,18 +47,18 @@ public class BookController {
 			.body(response);
 	}
 
-	// @PatchMapping("/{bookId}")
-	// public ResponseEntity<BookDetailResponse> update(
-	// 	@PathVariable UUID bookId,
-	// 	@Valid @RequestBody BookUpdateRequest request
-	// ) {
-	// 	Book book = bookService.update(bookId, request.nickname());
-	// 	BookDetailResponse response = BookDetailResponse.of(book);
-	// 	return ResponseEntity
-	// 		.status(HttpStatus.OK)
-	// 		.body(response);
-	// }
-	//
+	@PatchMapping("/{bookId}")
+	public ResponseEntity<BookDetailResponse> update(
+		@PathVariable UUID bookId,
+		@Valid @RequestBody BookUpdateRequest request
+	) {
+		Book book = bookService.update(bookId, request);
+		BookDetailResponse response = BookDetailResponse.of(book);
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(response);
+	}
+
 	// @DeleteMapping("/{bookId}")
 	// public ResponseEntity<Void> softDelete(
 	// 	@PathVariable UUID bookId

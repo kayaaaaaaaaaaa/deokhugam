@@ -25,7 +25,7 @@ public record BookCreateRequest(
 	public Book toEntity() {
 		String resolvedThumbnailUrl = (thumbnailUrl == null || thumbnailUrl.isBlank())
 			? ""
-			: thumbnailUrl;
+			: thumbnailUrl.trim();
 		return Book.create(
 			title,
 			author,

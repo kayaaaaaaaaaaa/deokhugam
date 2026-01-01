@@ -10,9 +10,9 @@ public class BookNotFoundException extends BookException {
 		super(ErrorCode.BOOK_NOT_FOUND);
 	}
 
-	public static BookNotFoundException withId(UUID id) {
+	public static BookNotFoundException withId(UUID bookId) {
 		BookNotFoundException exception = new BookNotFoundException();
-		exception.addDetail("id", id);
+		exception.addDetail("bookId", bookId);
 		return exception;
 	}
 }

@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import deokhugam.deokhugam.book.dto.request.BookCreateRequest;
+import deokhugam.deokhugam.book.dto.request.BookUpdateRequest;
 import deokhugam.deokhugam.book.entity.Book;
 import deokhugam.deokhugam.book.exception.BookNotFoundException;
 import deokhugam.deokhugam.book.repository.BookRepository;
-import deokhugam.deokhugam.user.entity.User;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -27,23 +27,34 @@ public class BasicBookService implements BookService {
 	}
 
 	@Override
-	public Book findById(UUID userId) {
-		Book book = bookRepository.findById(userId).orElseThrow(BookNotFoundException::new);
+	public Book findById(UUID bookId) {
+		Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
 		return book;
 	}
 
 	@Override
-	public User update(UUID userId, String nickname) {
-		return null;
+	@Transactional
+	public Book update(UUID bookId, BookUpdateRequest request) {
+		Book book = bookRepository.findById(bookId)
+			.orElseThrow(() -> BookNotFoundException.withId(bookId));
+		book.updateDetails(
+			request.title(),
+			request.author(),
+			request.description(),
+			request.publisher(),
+			request.publishedDate(),
+			request.thumbnailUrl()
+		);
+		return book;
 	}
 
 	@Override
-	public void softDelete(UUID userId) {
+	public void softDelete(UUID bookId) {
 
 	}
 
 	@Override
-	public void hardDelete(UUID userId) {
+	public void hardDelete(UUID bookId) {
 
 	}
 }

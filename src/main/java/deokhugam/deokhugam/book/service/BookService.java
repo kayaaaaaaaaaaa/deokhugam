@@ -3,17 +3,17 @@ package deokhugam.deokhugam.book.service;
 import java.util.UUID;
 
 import deokhugam.deokhugam.book.dto.request.BookCreateRequest;
+import deokhugam.deokhugam.book.dto.request.BookUpdateRequest;
 import deokhugam.deokhugam.book.entity.Book;
-import deokhugam.deokhugam.user.entity.User;
 
 public interface BookService {
 	Book create(BookCreateRequest request);
 
-	Book findById(UUID userId);
+	Book findById(UUID bookId);
 
-	User update(UUID userId, String nickname);
+	Book update(UUID userId, BookUpdateRequest request);
 
-	void softDelete(UUID userId);
+	void softDelete(UUID bookId);
 
-	void hardDelete(UUID userId);
+	void hardDelete(UUID bookId);
 }
