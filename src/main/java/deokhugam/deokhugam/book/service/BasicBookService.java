@@ -57,7 +57,10 @@ public class BasicBookService implements BookService {
 	}
 
 	@Override
+	@Transactional
 	public void hardDelete(UUID bookId) {
-
+		Book book = bookRepository.findById(bookId)
+			.orElseThrow(() -> BookNotFoundException.withId(bookId));
+		bookRepository.delete(book);
 	}
 }

@@ -60,15 +60,6 @@ public class BookController {
 			.body(response);
 	}
 
-	// @DeleteMapping("/{bookId}/hard")
-	// public ResponseEntity<Void> hardDelete(
-	// 	@PathVariable UUID bookId
-	// ) {
-	// 	bookService.hardDelete(bookId);
-	// 	return ResponseEntity
-	// 		.status(HttpStatus.NO_CONTENT)
-	// 		.build();
-	// }
 	@DeleteMapping("/{bookId}")
 	public ResponseEntity<Void> softDelete(
 		@PathVariable UUID bookId
@@ -79,5 +70,14 @@ public class BookController {
 			.build();
 	}
 
+	@DeleteMapping("/{bookId}/hard")
+	public ResponseEntity<Void> hardDelete(
+		@PathVariable UUID bookId
+	) {
+		bookService.hardDelete(bookId);
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
+			.build();
+	}
 
 }
