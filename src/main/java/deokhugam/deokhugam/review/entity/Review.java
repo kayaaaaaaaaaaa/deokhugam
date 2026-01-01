@@ -1,5 +1,6 @@
 package deokhugam.deokhugam.review.entity;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class Review {
 	private String content;
 
 	@Column(name = "rating", nullable = false, precision = 2, scale = 1)
-	private double rating;
+	private BigDecimal rating;
 
 	@Column(name = "like_count", nullable = false)
 	private int likeCount = 0;
@@ -56,7 +57,7 @@ public class Review {
 		UUID userId,
 		UUID bookId,
 		String content,
-		double rating
+		BigDecimal rating
 	) {
 		Review review = new Review();
 
@@ -83,7 +84,7 @@ public class Review {
 		}
 	}
 
-	public void updateRating(double newRating) {
+	public void updateRating(BigDecimal newRating) {
 		if (this.rating != newRating) {
 			this.rating = newRating;
 			touch();

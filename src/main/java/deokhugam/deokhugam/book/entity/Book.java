@@ -1,5 +1,6 @@
 package deokhugam.deokhugam.book.entity;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class Book {
 	private int reviewCount = 0;
 
 	@Column(name = "rating", nullable = false, precision = 2, scale = 1)
-	private double rating;
+	private BigDecimal rating;
 
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private Instant createdAt;
@@ -76,7 +77,7 @@ public class Book {
 		LocalDate publishedDate,
 		String isbn,
 		String thumbnailUrl,
-		double rating
+		BigDecimal rating
 	) {
 		Book book = new Book();
 
@@ -110,7 +111,7 @@ public class Book {
 		}
 	}
 
-	public void updateRating(double newRating) {
+	public void updateRating(BigDecimal newRating) {
 		if (this.rating != newRating) {
 			this.rating = newRating;
 			touch();
