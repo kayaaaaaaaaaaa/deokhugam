@@ -31,3 +31,12 @@ public class BasicUserService implements UserService {
 		return user;
 	}
 
+	@Override
+	@Transactional
+	public User update(UUID userId, String nickname) {
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> UserNotFoundException.withId(userId));
+		user.updateProfile(nickname);
+		return user;
+	}
+

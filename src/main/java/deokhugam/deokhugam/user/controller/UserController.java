@@ -35,4 +35,16 @@ public class UserController {
 			.body(response);
 	}
 
+	@PatchMapping("/{userId}")
+	public ResponseEntity<UserDetailResponse> update(
+		@PathVariable UUID userId,
+		@Valid @RequestBody UserUpdateRequest request
+	) {
+		User user = userService.update(userId, request.nickname());
+		UserDetailResponse response = UserDetailResponse.of(user);
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(response);
+	}
+
 }
