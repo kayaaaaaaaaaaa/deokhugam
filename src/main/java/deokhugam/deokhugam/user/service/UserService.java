@@ -11,3 +11,5 @@ public interface UserService {
 
 	User update(UUID userId, String nickname);
 
+	void softDelete(UUID userId);
+

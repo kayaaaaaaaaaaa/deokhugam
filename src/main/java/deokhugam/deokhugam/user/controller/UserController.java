@@ -47,4 +47,14 @@ public class UserController {
 			.body(response);
 	}
 
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<Void> softDelete(
+		@PathVariable UUID userId
+	) {
+		userService.softDelete(userId);
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
+			.build();
+	}
+
 }

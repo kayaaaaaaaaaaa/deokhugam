@@ -40,3 +40,11 @@ public class BasicUserService implements UserService {
 		return user;
 	}
 
+	@Override
+	@Transactional
+	public void softDelete(UUID userId) {
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> UserNotFoundException.withId(userId));
+		user.softDelete();
+	}
+
