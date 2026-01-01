@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import deokhugam.deokhugam.book.dto.request.BookCreateRequest;
 import deokhugam.deokhugam.book.entity.Book;
+import deokhugam.deokhugam.book.exception.BookNotFoundException;
 import deokhugam.deokhugam.book.repository.BookRepository;
 import deokhugam.deokhugam.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ public class BasicBookService implements BookService {
 
 	@Override
 	public Book findById(UUID userId) {
-		return null;
+		Book book = bookRepository.findById(userId).orElseThrow(BookNotFoundException::new);
+		return book;
 	}
 
 	@Override

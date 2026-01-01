@@ -43,7 +43,7 @@ public class BookController {
 			.status(HttpStatus.OK)
 			.body(response);
 	}
-	//
+
 	// @PatchMapping("/{bookId}")
 	// public ResponseEntity<BookDetailResponse> update(
 	// 	@PathVariable UUID bookId,

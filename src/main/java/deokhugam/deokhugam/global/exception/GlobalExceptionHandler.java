@@ -1,4 +1,5 @@
 package deokhugam.deokhugam.global.exception;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,8 +32,6 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(status).body(errorResponse);
 	}
 
-
-
 	/**
 	 * 시스템 예외에 대한 처리를 합니다.
 	 *
@@ -43,12 +42,13 @@ public class GlobalExceptionHandler {
 	// 요청 값 검증 실패 시
 	// 예시) 요청 값 검증 실패: message=..., errors=[field=email, rejected=bad, msg=이메일 형식이 아닙니다 | field=age, rejected=-1, msg=최소 18 이상이어야 합니다]
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+	protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(
+		MethodArgumentNotValidException exception) {
 		List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
 		String formattedErrors = fieldErrors.stream()
 			.map(error -> String.format("field=%s, rejected=%s, msg=%s",
 				error.getField(),
-				String.valueOf(error.getRejectedValue()),
+				error.getRejectedValue(),
 				error.getDefaultMessage()))
 			.collect(Collectors.joining(" | "));
 		log.error("요청 값 검증 실패: message={}, errors=[{}]", exception.getMessage(), formattedErrors);
@@ -90,10 +90,10 @@ public class GlobalExceptionHandler {
 				 INVALID_REQUEST -> HttpStatus.BAD_REQUEST;
 
 			// 401 Unauthorized
-			case LOGIN_INPUT_INVALID ->  HttpStatus.UNAUTHORIZED;
+			case LOGIN_INPUT_INVALID -> HttpStatus.UNAUTHORIZED;
 
 			// 404 Not Found
-			case USER_NOT_FOUND -> HttpStatus.NOT_FOUND;
+			case USER_NOT_FOUND, BOOK_NOT_FOUND -> HttpStatus.NOT_FOUND;
 
 			// 409 Conflict
 			case EMAIL_ALREADY_EXISTS,
