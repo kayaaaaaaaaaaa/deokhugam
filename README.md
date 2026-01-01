@@ -57,3 +57,6 @@ https://www.notion.so/BOM-error-illegal-character-ufeff-2da4dd511f5380a3b838d60c
 
 ### scale has no meaning for SQL floating point types
 https://www.notion.so/scale-has-no-meaning-for-SQL-floating-point-types-2db4dd511f5380cc9d9ed1dd39ddbc5f?source=copy_link
+
+### H2 db 실행 모드
+https://www.notion.so/H2-db-2db4dd511f53801e8e2ac1d6454131e3?source=copy_link
