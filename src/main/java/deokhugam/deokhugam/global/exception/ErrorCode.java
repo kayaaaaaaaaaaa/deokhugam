@@ -21,7 +21,10 @@ public enum ErrorCode {
 	USER_NOT_FOUND("사용자를 찾을 수 없습니다."),
 
 	// book
-	BOOK_NOT_FOUND("해당 도서를 찾을 수 없습니다.");
+	BOOK_NOT_FOUND("해당 도서를 찾을 수 없습니다."),
+
+	// review
+	REVIEW_NOT_FOUND("해당 리뷰를 찾을 수 없습니다.");
 
 	private final String message;
 }

@@ -39,4 +39,13 @@ public class ReviewController {
 			.body(response);
 	}
 
+	@GetMapping("/{reviewId}")
+	public ResponseEntity<ReviewDetailResponse> detail(@PathVariable UUID reviewId) {
+		Review review = reviewService.findById(reviewId);
+		ReviewDetailResponse response = ReviewDetailResponse.of(review);
+		return ResponseEntity
+			.status(HttpStatus.OK)
+			.body(response);
+	}
+
 }

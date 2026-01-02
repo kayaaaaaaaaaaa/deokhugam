@@ -93,7 +93,8 @@ public class GlobalExceptionHandler {
 			case LOGIN_INPUT_INVALID -> HttpStatus.UNAUTHORIZED;
 
 			// 404 Not Found
-			case USER_NOT_FOUND, BOOK_NOT_FOUND -> HttpStatus.NOT_FOUND;
+			case USER_NOT_FOUND, BOOK_NOT_FOUND,
+				 REVIEW_NOT_FOUND -> HttpStatus.NOT_FOUND;
 
 			// 409 Conflict
 			case EMAIL_ALREADY_EXISTS,

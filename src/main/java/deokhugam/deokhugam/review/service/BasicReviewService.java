@@ -37,4 +37,10 @@ public class BasicReviewService implements ReviewService {
 		return reviewRepository.save(review);
 	}
 
+	@Override
+	public Review findById(UUID reviewId) {
+		Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+		return review;
+	}
+
 }
