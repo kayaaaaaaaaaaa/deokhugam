@@ -3,6 +3,7 @@ package deokhugam.deokhugam.book.entity;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -118,7 +119,49 @@ public class Book {
 		}
 	}
 
-	public void delete() {
+	public void updateDetails(
+		String title,
+		String author,
+		String description,
+		String publisher,
+		LocalDate publishedDate,
+		String thumbnailUrl
+	) {
+		boolean changed = false;
+		if (!Objects.equals(this.title, title)) {
+			this.title = title;
+			changed = true;
+		}
+		if (!Objects.equals(this.author, author)) {
+			this.author = author;
+			changed = true;
+		}
+		if (!Objects.equals(this.description, description)) {
+			this.description = description;
+			changed = true;
+		}
+		if (!Objects.equals(this.publisher, publisher)) {
+			this.publisher = publisher;
+			changed = true;
+		}
+		if (!Objects.equals(this.publishedDate, publishedDate)) {
+			this.publishedDate = publishedDate;
+			changed = true;
+		}
+		if (thumbnailUrl != null) {
+			String normalizedThumbnailUrl = thumbnailUrl.trim();
+			if (!normalizedThumbnailUrl.isBlank()
+				&& !Objects.equals(this.thumbnailUrl, normalizedThumbnailUrl)) {
+				this.thumbnailUrl = normalizedThumbnailUrl;
+				changed = true;
+			}
+		}
+		if (changed) {
+			touch();
+		}
+	}
+
+	public void softDelete() {
 		if (!this.isDeleted) {
 			this.isDeleted = true;
 			touch();

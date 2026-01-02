@@ -18,14 +18,14 @@ public class BasicUserService implements UserService {
 	private final UserRepository userRepository;
 
 	@Override
-	public User findUserById(UUID userId) {
+	public User findById(UUID userId) {
 		User user = userRepository.findById(userId)
 			.orElseThrow(() -> UserNotFoundException.withId(userId));
 		return user;
 	}
 
 	@Override
-	public User findUserByEmail(String email) {
+	public User findByEmail(String email) {
 		User user = userRepository.findByEmail(email)
 			.orElseThrow(() -> UserNotFoundException.withEmail(email));
 		return user;

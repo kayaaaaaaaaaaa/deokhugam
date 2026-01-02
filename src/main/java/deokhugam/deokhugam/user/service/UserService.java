@@ -5,9 +5,9 @@ import java.util.UUID;
 import deokhugam.deokhugam.user.entity.User;
 
 public interface UserService {
-	User findUserById(UUID userId);
+	User findById(UUID userId);
 
-	User findUserByEmail(String email);
+	User findByEmail(String email);
 
 	User update(UUID userId, String nickname);
 

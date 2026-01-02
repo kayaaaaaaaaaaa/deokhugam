@@ -28,7 +28,7 @@ public class UserController {
 
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserDetailResponse> detail(@PathVariable UUID userId) {
-		User user = userService.findUserById(userId);
+		User user = userService.findById(userId);
 		UserDetailResponse response = UserDetailResponse.of(user);
 		return ResponseEntity
 			.status(HttpStatus.OK)
