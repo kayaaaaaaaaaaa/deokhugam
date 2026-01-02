@@ -129,9 +129,17 @@ public class Review {
 		}
 	}
 
+	public void softDelete() {
+		if (!this.isDeleted) {
+			this.isDeleted = true;
+			touch();
+		}
+	}
+
 	/* < 내부 공통 로직 - 수정시간 갱신 > */
 
 	private void touch() {
 		this.updatedAt = Instant.now();
 	}
+
 }

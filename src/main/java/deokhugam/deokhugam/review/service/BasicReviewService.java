@@ -55,4 +55,12 @@ public class BasicReviewService implements ReviewService {
 		return review;
 	}
 
+	@Override
+	@Transactional
+	public void softDelete(UUID reviewId) {
+		Review review = reviewRepository.findById(reviewId)
+			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+		review.delete();
+	}
+
 }
