@@ -55,6 +55,7 @@ public class BasicUserService implements UserService {
 		user.softDelete();
 	}
 
+	// TODO 물리삭제 시 관련정보 모두 삭제
 	@Override
 	@Transactional
 	public void hardDelete(UUID pathUserId, UUID loginUserId) {

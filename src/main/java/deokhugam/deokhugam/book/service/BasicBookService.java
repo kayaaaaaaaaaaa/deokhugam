@@ -23,6 +23,7 @@ public class BasicBookService implements BookService {
 	@Override
 	@Transactional
 	public Book create(BookCreateRequest request, MultipartFile thumbnailImage) {
+		// TODO 동일한 isbn으로 등록된 책 존재여부 검증로직 추가
 		Book book = request.toEntity();
 		return bookRepository.save(book);
 	}
@@ -57,6 +58,7 @@ public class BasicBookService implements BookService {
 		book.softDelete();
 	}
 
+	// TODO 물리삭제 시 관련정보 모두 삭제
 	@Override
 	@Transactional
 	public void hardDelete(UUID bookId) {

@@ -29,6 +29,11 @@ public class BasicReviewService implements ReviewService {
 	private final BookRepository bookRepository;
 	private final UserRepository userRepository;
 
+	//Todo 리뷰 목록조회 기능 추가
+	// @GetMapping(path = "")
+	// public ResponseEntity<> list() {
+	// }
+
 	@Override
 	@Transactional
 	public Review create(ReviewCreateRequest request) {
@@ -74,6 +79,7 @@ public class BasicReviewService implements ReviewService {
 		review.delete();
 	}
 
+	// TODO 물리삭제 시 관련정보 모두 삭제
 	@Override
 	@Transactional
 	public void hardDelete(UUID reviewId, UUID loginUserId) {

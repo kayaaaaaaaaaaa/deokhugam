@@ -33,7 +33,7 @@ public class BookController {
 
 	//Todo 도서 목록조회 기능 추가
 	// @GetMapping(path = "")
-	// public ResponseEntity<BookDetailResponse> list() {
+	// public ResponseEntity<> list() {
 	//
 	// }
 
