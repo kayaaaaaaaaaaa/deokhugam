@@ -24,7 +24,8 @@ public enum ErrorCode {
 	BOOK_NOT_FOUND("해당 도서를 찾을 수 없습니다."),
 
 	// review
-	REVIEW_NOT_FOUND("해당 리뷰를 찾을 수 없습니다.");
+	REVIEW_NOT_FOUND("해당 리뷰를 찾을 수 없습니다."),
+	REVIEW_ALREADY_EXISTS("해당 도서에 작성된 리뷰가 존재합니다.");
 
 	private final String message;
 }

@@ -98,7 +98,8 @@ public class GlobalExceptionHandler {
 
 			// 409 Conflict
 			case EMAIL_ALREADY_EXISTS,
-				 NICKNAME_ALREADY_EXISTS -> HttpStatus.CONFLICT;
+				 NICKNAME_ALREADY_EXISTS,
+				 REVIEW_ALREADY_EXISTS -> HttpStatus.CONFLICT;
 
 			// 500 Internal Server Error
 			case INTERNAL_SERVER_ERROR -> HttpStatus.INTERNAL_SERVER_ERROR;

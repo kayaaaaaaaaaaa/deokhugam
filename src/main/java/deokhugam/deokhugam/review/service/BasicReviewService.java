@@ -11,6 +11,7 @@ import deokhugam.deokhugam.book.repository.BookRepository;
 import deokhugam.deokhugam.review.dto.request.ReviewCreateRequest;
 import deokhugam.deokhugam.review.dto.request.ReviewUpdateRequest;
 import deokhugam.deokhugam.review.entity.Review;
+import deokhugam.deokhugam.review.exception.ReviewAlreadyExistsException;
 import deokhugam.deokhugam.review.exception.ReviewNotFoundException;
 import deokhugam.deokhugam.review.repository.ReviewRepository;
 import deokhugam.deokhugam.user.entity.User;
@@ -34,6 +35,9 @@ public class BasicReviewService implements ReviewService {
 			.orElseThrow(() -> BookNotFoundException.withId(request.bookId()));
 		User user = userRepository.findById(request.userId())
 			.orElseThrow(() -> UserNotFoundException.withId(request.userId()));
+		if (reviewRepository.existsByUserIdAndBookId(request.userId(), request.bookId())) {
+			throw ReviewAlreadyExistsException.withUserAndBook(request.userId(), request.bookId());
+		}
 
 		Review review = request.toEntity(user, book);
 		return reviewRepository.save(review);

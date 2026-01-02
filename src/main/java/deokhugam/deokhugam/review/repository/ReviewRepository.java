@@ -9,4 +9,5 @@ import deokhugam.deokhugam.review.entity.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, UUID> {
+	boolean existsByUserIdAndBookId(UUID userId, UUID bookId);
 }
