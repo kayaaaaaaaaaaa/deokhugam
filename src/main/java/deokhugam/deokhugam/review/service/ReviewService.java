@@ -16,4 +16,5 @@ public interface ReviewService {
 
 	void softDelete(UUID reviewId);
 
+	void hardDelete(UUID reviewId);
 }

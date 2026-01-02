@@ -77,4 +77,14 @@ public class ReviewController {
 			.build();
 	}
 
+	@DeleteMapping("/{reviewId}/hard")
+	public ResponseEntity<Void> hardDelete(
+		@PathVariable UUID reviewId
+	) {
+		reviewService.hardDelete(reviewId);
+		return ResponseEntity
+			.status(HttpStatus.NO_CONTENT)
+			.build();
+	}
+
 }
