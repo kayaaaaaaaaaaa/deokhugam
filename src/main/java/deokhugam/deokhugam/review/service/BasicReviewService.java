@@ -9,7 +9,9 @@ import deokhugam.deokhugam.book.entity.Book;
 import deokhugam.deokhugam.book.exception.BookNotFoundException;
 import deokhugam.deokhugam.book.repository.BookRepository;
 import deokhugam.deokhugam.review.dto.request.ReviewCreateRequest;
+import deokhugam.deokhugam.review.dto.request.ReviewUpdateRequest;
 import deokhugam.deokhugam.review.entity.Review;
+import deokhugam.deokhugam.review.exception.ReviewNotFoundException;
 import deokhugam.deokhugam.review.repository.ReviewRepository;
 import deokhugam.deokhugam.user.entity.User;
 import deokhugam.deokhugam.user.exception.UserNotFoundException;
@@ -39,7 +41,17 @@ public class BasicReviewService implements ReviewService {
 
 	@Override
 	public Review findById(UUID reviewId) {
-		Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+		return reviewRepository.findById(reviewId)
+			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+	}
+
+	@Override
+	@Transactional
+	public Review update(UUID reviewId, ReviewUpdateRequest request) {
+		Review review = reviewRepository.findById(reviewId)
+			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+		review.updateContent(request.content());
+		review.updateRating(request.rating());
 		return review;
 	}
 

@@ -11,4 +11,7 @@ public interface ReviewService {
 	Review create(ReviewCreateRequest request);
 
 	Review findById(UUID reviewId);
+
+	Review update(UUID reviewId, ReviewUpdateRequest request);
+
 }

@@ -2,6 +2,7 @@ package deokhugam.deokhugam.review.entity;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 import deokhugam.deokhugam.book.entity.Book;
@@ -91,7 +92,7 @@ public class Review {
 	}
 
 	public void updateRating(BigDecimal newRating) {
-		if (this.rating != newRating) {
+		if (newRating != null && !Objects.equals(this.rating, newRating)) {
 			this.rating = newRating;
 			touch();
 		}

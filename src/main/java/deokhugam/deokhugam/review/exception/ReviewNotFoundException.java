@@ -2,10 +2,9 @@ package deokhugam.deokhugam.review.exception;
 
 import java.util.UUID;
 
-import deokhugam.deokhugam.book.exception.BookException;
 import deokhugam.deokhugam.global.exception.ErrorCode;
 
-public class ReviewNotFoundException extends BookException {
+public class ReviewNotFoundException extends ReviewException {
 
 	public ReviewNotFoundException() {
 		super(ErrorCode.REVIEW_NOT_FOUND);
