@@ -13,7 +13,7 @@ public interface BookService {
 
 	Book findById(UUID bookId);
 
-	Book update(UUID userId, BookUpdateRequest request);
+	Book update(UUID bookId, BookUpdateRequest request);
 
 	void softDelete(UUID bookId);
 
