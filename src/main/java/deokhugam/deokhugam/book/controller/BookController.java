@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +30,12 @@ import lombok.RequiredArgsConstructor;
 public class BookController {
 
 	private final BookService bookService;
+
+	//Todo 도서 목록조회 기능 추가
+	// @GetMapping(path = "")
+	// public ResponseEntity<BookDetailResponse> list() {
+	//
+	// }
 
 	@PostMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<BookDetailResponse> create(
