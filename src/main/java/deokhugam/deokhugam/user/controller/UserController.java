@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,10 +38,11 @@ public class UserController {
 
 	@PatchMapping("/{userId}")
 	public ResponseEntity<UserDetailResponse> update(
-		@PathVariable UUID userId,
+		@PathVariable UUID pathUserId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId,
 		@Valid @RequestBody UserUpdateRequest request
 	) {
-		User user = userService.update(userId, request.nickname());
+		User user = userService.update(pathUserId, loginUserId, request.nickname());
 		UserDetailResponse response = UserDetailResponse.of(user);
 		return ResponseEntity
 			.status(HttpStatus.OK)
@@ -49,9 +51,10 @@ public class UserController {
 
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<Void> softDelete(
-		@PathVariable UUID userId
+		@PathVariable UUID pathUserId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId
 	) {
-		userService.softDelete(userId);
+		userService.softDelete(pathUserId, loginUserId);
 		return ResponseEntity
 			.status(HttpStatus.NO_CONTENT)
 			.build();
@@ -59,9 +62,10 @@ public class UserController {
 
 	@DeleteMapping("/{userId}/hard")
 	public ResponseEntity<Void> hardDelete(
-		@PathVariable UUID userId
+		@PathVariable UUID pathUserId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId
 	) {
-		userService.hardDelete(userId);
+		userService.hardDelete(pathUserId, loginUserId);
 		return ResponseEntity
 			.status(HttpStatus.NO_CONTENT)
 			.build();

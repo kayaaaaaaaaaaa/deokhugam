@@ -13,6 +13,7 @@ import deokhugam.deokhugam.review.dto.request.ReviewUpdateRequest;
 import deokhugam.deokhugam.review.entity.Review;
 import deokhugam.deokhugam.review.exception.ReviewAlreadyExistsException;
 import deokhugam.deokhugam.review.exception.ReviewNotFoundException;
+import deokhugam.deokhugam.review.exception.ReviewPermissionException;
 import deokhugam.deokhugam.review.repository.ReviewRepository;
 import deokhugam.deokhugam.user.entity.User;
 import deokhugam.deokhugam.user.exception.UserNotFoundException;
@@ -51,9 +52,12 @@ public class BasicReviewService implements ReviewService {
 
 	@Override
 	@Transactional
-	public Review update(UUID reviewId, ReviewUpdateRequest request) {
+	public Review update(UUID reviewId, ReviewUpdateRequest request, UUID loginUserId) {
 		Review review = reviewRepository.findById(reviewId)
 			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+		if (!loginUserId.equals(review.getUser().getId())) {
+			throw ReviewPermissionException.withUserAndBook(loginUserId, reviewId);
+		}
 		review.updateContent(request.content());
 		review.updateRating(request.rating());
 		return review;
@@ -61,17 +65,23 @@ public class BasicReviewService implements ReviewService {
 
 	@Override
 	@Transactional
-	public void softDelete(UUID reviewId) {
+	public void softDelete(UUID reviewId, UUID loginUserId) {
 		Review review = reviewRepository.findById(reviewId)
 			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+		if (!loginUserId.equals(review.getUser().getId())) {
+			throw ReviewPermissionException.withUserAndBook(loginUserId, reviewId);
+		}
 		review.delete();
 	}
 
 	@Override
 	@Transactional
-	public void hardDelete(UUID reviewId) {
+	public void hardDelete(UUID reviewId, UUID loginUserId) {
 		Review review = reviewRepository.findById(reviewId)
 			.orElseThrow(() -> ReviewNotFoundException.withId(reviewId));
+		if (!loginUserId.equals(review.getUser().getId())) {
+			throw ReviewPermissionException.withUserAndBook(loginUserId, reviewId);
+		}
 		reviewRepository.delete(review);
 	}
 

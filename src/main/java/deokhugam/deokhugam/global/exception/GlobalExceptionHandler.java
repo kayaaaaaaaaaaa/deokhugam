@@ -92,6 +92,9 @@ public class GlobalExceptionHandler {
 			// 401 Unauthorized
 			case LOGIN_INPUT_INVALID -> HttpStatus.UNAUTHORIZED;
 
+			// 403 Forbidden
+			case USER_ACCESS_DENIED, REVIEW_ACCESS_DENIED -> HttpStatus.FORBIDDEN;
+
 			// 404 Not Found
 			case USER_NOT_FOUND, BOOK_NOT_FOUND,
 				 REVIEW_NOT_FOUND -> HttpStatus.NOT_FOUND;

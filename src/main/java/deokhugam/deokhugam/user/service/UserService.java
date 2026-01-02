@@ -9,9 +9,9 @@ public interface UserService {
 
 	User findByEmail(String email);
 
-	User update(UUID userId, String nickname);
+	User update(UUID pathUserId, UUID loginUserId, String nickname);
 
-	void softDelete(UUID userId);
+	void softDelete(UUID pathuserId, UUID loginUserId);
 
-	void hardDelete(UUID userId);
+	void hardDelete(UUID pathuserId, UUID loginUserId);
 }

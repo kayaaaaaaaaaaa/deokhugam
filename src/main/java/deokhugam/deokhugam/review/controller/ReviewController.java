@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,9 +59,10 @@ public class ReviewController {
 	@PatchMapping("/{reviewId}")
 	public ResponseEntity<ReviewDetailResponse> update(
 		@PathVariable UUID reviewId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId,
 		@Valid @RequestBody ReviewUpdateRequest request
 	) {
-		Review review = reviewService.update(reviewId, request);
+		Review review = reviewService.update(reviewId, request, loginUserId);
 		ReviewDetailResponse response = ReviewDetailResponse.of(review);
 		return ResponseEntity
 			.status(HttpStatus.OK)
@@ -69,9 +71,11 @@ public class ReviewController {
 
 	@DeleteMapping("/{reviewId}")
 	public ResponseEntity<Void> softDelete(
-		@PathVariable UUID reviewId
+		@PathVariable UUID reviewId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId
+
 	) {
-		reviewService.softDelete(reviewId);
+		reviewService.softDelete(reviewId, loginUserId);
 		return ResponseEntity
 			.status(HttpStatus.NO_CONTENT)
 			.build();
@@ -79,9 +83,10 @@ public class ReviewController {
 
 	@DeleteMapping("/{reviewId}/hard")
 	public ResponseEntity<Void> hardDelete(
-		@PathVariable UUID reviewId
+		@PathVariable UUID reviewId,
+		@RequestHeader("deokhugam-request-user-id") UUID loginUserId
 	) {
-		reviewService.hardDelete(reviewId);
+		reviewService.hardDelete(reviewId, loginUserId);
 		return ResponseEntity
 			.status(HttpStatus.NO_CONTENT)
 			.build();

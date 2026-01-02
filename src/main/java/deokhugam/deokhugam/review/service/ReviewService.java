@@ -12,9 +12,9 @@ public interface ReviewService {
 
 	Review findById(UUID reviewId);
 
-	Review update(UUID reviewId, ReviewUpdateRequest request);
+	Review update(UUID reviewId, ReviewUpdateRequest request, UUID userId);
 
-	void softDelete(UUID reviewId);
+	void softDelete(UUID reviewId, UUID userId);
 
-	void hardDelete(UUID reviewId);
+	void hardDelete(UUID reviewId, UUID userId);
 }
